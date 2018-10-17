@@ -24,31 +24,33 @@ angular.module('News', ['ui.router'])
         };
         return o;
     }])
-    .controller('MainCtrl', [
-        '$scope',
-        'postFactory',
-        function($scope, postFactory) {
+    .controller('MainCtrl',
+        function($scope, $http, postFactory) {
             $scope.test = 'Hello world!';
 
-            $scope.posts = postFactory.posts;
-
+             $scope.posts= postFactory.posts;
+            
             $scope.addPost = function() {
-                if ($scope.formContent === '') { return; }
+             $http.get("https://dog.ceo/api/breeds/image/random")
+            .then(function(response)  {
+                console.log(response.data.message);
                 $scope.posts.push({
+                    image: response.data.message,
                     title: $scope.formContent,
                     upvotes: 0,
                     comments: []
                 });
                 $scope.formContent = '';
+            })
             };
-
+            
             $scope.incrementUpvotes = function(post) {
                 post.upvotes += 1;
             };
 
-        }
-    ])
-    .controller('PostsCtrl', [
+        })
+        
+         .controller('PostsCtrl', [
         '$scope',
         '$stateParams',
         'postFactory',
@@ -69,3 +71,4 @@ angular.module('News', ['ui.router'])
             };
         }
     ]);
+
