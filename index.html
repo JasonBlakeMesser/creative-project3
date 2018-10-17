@@ -17,11 +17,21 @@
         console.log(audio);
        audio.play();
  }
+    function bark() {
+        var audio = document.getElementById("myAudio2");
+        console.log(audio);
+       audio.play();
+ }
 </script>
 </head>
 
 <audio id="myAudio">
   <source src="whoLetDogs.mp3" type="audio/ogg">
+  Your browser does not support the audio element.
+</audio>
+
+<audio id="myAudio2">
+  <source src="bark.mp3" type="audio/ogg">
   Your browser does not support the audio element.
 </audio>
 
@@ -64,7 +74,7 @@
         </div>
 
         <div ng-repeat="comment in post.comments | orderBy:'-upvotes'">
-            <span class="glyphicon glyphicon-thumbs-up" ng-click="incrementUpvotes(comment)"></span> {{comment.upvotes}}
+            <span class="glyphicon glyphicon-thumbs-up" onclick="bark()" ng-click="incrementUpvotes(comment)"></span> {{comment.upvotes}}
             <span style="font-size:20px; margin-left:10px;">
         {{comment.body}}
       </span>
