@@ -21,24 +21,57 @@
 <style>
 
 div {
-    background-color: lightblue;
+    background-color: #6E8ABC;
 }
 
 #header {
-    height: 200px;
-    width: 400px;
-    border-radius: 50px;
+    height: 260px;
+    width: 100%;
+    border-radius: 0px;
     background-image: url('header.png');
     background-position: center;
+    background-size: cover;
 }
 
 #container {
     height: 100%;
 }
 
-h1 {
-    font-size: 25;
-    padding-top: 120px;
+button{
+  background: rgb(48, 48, 48);
+  color:#fff;
+  border:none;
+  position:relative;
+  height:60px;
+  font-size:1.4em;
+  padding:0 2em;
+  cursor:pointer;
+  transition:800ms ease all;
+  outline:none;
+}
+button:hover{
+  background: #6E8ABC;
+  color: rgb(48, 48, 48);
+}
+button:before,button:after{
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background: rgb(48, 48, 48);
+  transition:400ms ease all;
+}
+button:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+button:hover:before,button:hover:after{
+  width:100%;
+  transition:800ms ease all;
 }
 
 h2 {
@@ -47,6 +80,19 @@ h2 {
 
 #spacer {
     height: 30px;
+}
+
+img { 
+   border:10px solid white;
+}
+
+a {
+    color: white;
+    font-size: 18;
+}
+
+a:hover {
+    color: lightblue;
 }
     
 </style>
@@ -63,6 +109,8 @@ h2 {
 </audio>
 
 <div id = "container">
+    <center><div id = "header">
+        </div></center>
 <body ng-app="News">
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
@@ -72,26 +120,22 @@ h2 {
     
 
     <script type="text/ng-template" id="/home.html">
-    
-    <div id = "spacer"></div>
-    <center><div id = "header">
-            <center><h1>The Dog Generator</h1></center>
-            <center><h2>(Enable Volume)</h2></center>
-        </div></center>
+        <center><h2>(Enable Volume)</h2></center>
           <form ng-submit="addPost()" style="margin-top:25px;">
-            <center><button type="submit" onclick="playAudio()" class="btn btn-primary">Generate Dog</button></center>
+            <center><button type="sumbit" onclick="playAudio()">Generate Dog</button></center>
         </form>
         
         <div ng-repeat="post in posts | orderBy:'-upvotes'">
             <span class="glyphicon glyphicon-thumbs-up" ng-click="incrementUpvotes(post)"></span> {{post.upvotes}}
-            <span style="font-size:20px; margin-left:10px;">
+            <span style="font-color: white; font-size:20px; margin-left:10px;">
             <center><img id = "image" height = "400px" width = "400px" src = {{post.image}}></center>
           
       </span>
             <span>
-        <a href="#/posts/{{posts.indexOf(post)}}">Comments</a>
+        <center><a id = "comments" href="#/posts/{{posts.indexOf(post)}}">Comments</a></center>
       </span>
         </div>
+        <div id = "spacer"></div>
         </div>
 
     </script>
@@ -115,7 +159,7 @@ h2 {
             <div class="form-group">
                 <input type="text" class="form-control" placeholder="Comment" ng-model="body"></input>
             </div>
-            <button type="submit" class="btn btn-primary">Post</button>
+            <button type="submit">Post</button>
         </form>
 
     </script>
