@@ -17,6 +17,11 @@
         console.log(audio);
        audio.play();
  }
+
+function goBack() {
+    window.history.back();
+}
+
 </script>
 <style>
 
@@ -146,7 +151,7 @@ a:hover {
                 {{post.title}}
             </h3>
         </div>
-
+        <button onclick="goBack()">Go Home</button>
         <div ng-repeat="comment in post.comments | orderBy:'-upvotes'">
             <span class="glyphicon glyphicon-thumbs-up" onclick="bark()" ng-click="incrementUpvotes(comment)"></span> {{comment.upvotes}}
             <span style="font-size:20px; margin-left:10px;">
